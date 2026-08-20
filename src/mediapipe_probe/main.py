@@ -84,10 +84,18 @@ with HandLandmarker.create_from_options(options) as landmarker:
                 for x, y in pixel_landmarks:
                     cv2.circle(frame, (x, y), 5, (0, 255, 0), -1)
 
-                for start_idx, end_idx in HAND_CONNECTIONS:
+                for connection in HAND_CONNECTIONS:
+                    start_idx = connection.start
+                    end_idx = connection.end
+                    
                     if start_idx < len(pixel_landmarks) and end_idx < len(pixel_landmarks):
                         cv2.line(
-                            frame, pixel_landmarks[start_idx], pixel_landmarks[end_idx], (255, 0, 0), 2)
+                            frame, 
+                            pixel_landmarks[start_idx], 
+                            pixel_landmarks[end_idx], 
+                            (255, 0, 0), 
+                            2
+                        )
 
         cv2.imshow('Modern Hand Tracker', frame)
 
